@@ -8,10 +8,10 @@
         <div>
             <span class="badge bg-primary mb-2 rounded-pill px-3 py-2">Results Analysis</span>
             <h1 class="h2 mb-0 fw-bold">Algorithm Comparison</h1>
-            <p class="text-muted mb-0 mt-1">Target: <strong class="text-white">{{ amount }}</strong> | Coins: <strong
-                    class="text-white">{{ coins }}</strong></p>
+            <p class="text-muted mb-0 mt-1">Target: <strong class="text-dark">{{ amount }}</strong> | Coins: <strong
+                    class="text-dark">{{ coins }}</strong></p>
         </div>
-        <a href="/" class="btn btn-outline-light rounded-pill px-4">
+        <a href="/" class="btn btn-outline-secondary rounded-pill px-4">
             <i class="fas fa-undo me-2"></i> New Problem
         </a>
     </div>
@@ -26,7 +26,7 @@
                     style="width: {% if greedy_success %}{{ (greedy_count / (greedy_count + dp_count)) * 100 }}{% else %}100{% endif %}%">
                 </div>
             </div>
-            <div class="ms-3 fw-bold text-white mono-font">{{ greedy_time }} ms</div>
+            <div class="ms-3 fw-bold text-dark mono-font">{{ greedy_time }} ms</div>
         </div>
         <div class="d-flex align-items-center">
             <div class="small fw-bold me-3 text-success text-uppercase" style="width: 60px">DP</div>
@@ -35,7 +35,7 @@
                     style="width: {% if dp_success %}{{ (dp_count / (greedy_count + dp_count)) * 100 }}{% else %}0{% endif %}%">
                 </div>
             </div>
-            <div class="ms-3 fw-bold text-white mono-font">{{ dp_time }} ms</div>
+            <div class="ms-3 fw-bold text-dark mono-font">{{ dp_time }} ms</div>
         </div>
     </div>
 
@@ -65,7 +65,7 @@
                 <div class="card-body p-4">
                     <div class="row text-center mb-4">
                         <div class="col-6">
-                            <h2 class="display-4 fw-bold mb-0 text-white">{{ greedy_count }}</h2>
+                            <h2 class="display-4 fw-bold mb-0 text-dark">{{ greedy_count }}</h2>
                             <span class="text-muted small text-uppercase fw-bold">Total Coins</span>
                         </div>
                         <div class="col-6">
@@ -95,11 +95,10 @@
                                 {% endif %}
                             </div>
                             <div class="step-content">
-                                <div class="fw-bold text-white">{{ step.desc }}</div>
+                                <div class="fw-bold text-dark">{{ step.desc }}</div>
                                 <div class="step-detail">
                                     Remaining: <strong>{{ step.remaining }}</strong>
-                                    {% if step.coin %} | Coin: <span class="text-white">{{ step.coin }}</span>{% endif
-                                    %}
+                                    {% if step.coin %} | Coin: <span class="text-dark">{{ step.coin }}</span>{% endif %}
                                 </div>
                             </div>
                         </div>
@@ -116,13 +115,13 @@
                 <div class="card-header-custom border-success border-top border-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0 text-success">Dynamic Programming</h4>
-                        <span class="badge bg-success fw-bold rounded-pill">Optimal</span>
+                        <span class="badge bg-success fw-bold rounded-pill text-white">Optimal</span>
                     </div>
                 </div>
                 <div class="card-body p-4">
                     <div class="row text-center mb-4">
                         <div class="col-6">
-                            <h2 class="display-4 fw-bold mb-0 text-white">{{ dp_count }}</h2>
+                            <h2 class="display-4 fw-bold mb-0 text-dark">{{ dp_count }}</h2>
                             <span class="text-muted small text-uppercase fw-bold">Total Coins</span>
                         </div>
                         <div class="col-6">
@@ -160,11 +159,10 @@
                                 {% endif %}
                             </div>
                             <div class="step-content">
-                                <div class="fw-bold text-white">{{ step.desc }}</div>
+                                <div class="fw-bold text-dark">{{ step.desc }}</div>
                                 <div class="step-detail">
                                     Remaining: <strong>{{ step.remaining }}</strong>
-                                    {% if step.coin %} | Pick: <span class="text-white">{{ step.coin }}</span>{% endif
-                                    %}
+                                    {% if step.coin %} | Pick: <span class="text-dark">{{ step.coin }}</span>{% endif %}
                                 </div>
                             </div>
                         </div>
