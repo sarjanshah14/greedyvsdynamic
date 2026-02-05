@@ -164,6 +164,8 @@ def solve():
             'coins_list': coins,
             'greedy_count': greedy_count if greedy_count != float('inf') else "Failed",
             'dp_count': dp_count if dp_count != float('inf') else "Failed",
+            'greedy_time': f"{greedy_time:.4f}",
+            'dp_time': f"{dp_time:.4f}",
             'is_optimal': greedy_count == dp_count
         }
         
@@ -179,12 +181,12 @@ def solve():
                                greedy_result=greedy_result,
                                greedy_count=greedy_count,
                                greedy_success=greedy_success,
-                               greedy_time=greedy_time,
+                               greedy_time=f"{greedy_time:.4f}",
                                greedy_steps=greedy_steps,
                                dp_result=dp_result,
                                dp_count=dp_count,
                                dp_success=dp_success,
-                               dp_time=dp_time,
+                               dp_time=f"{dp_time:.4f}",
                                dp_steps=dp_steps)
                                
     except ValueError:

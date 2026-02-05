@@ -58,22 +58,33 @@
             <div class="card result-card h-100">
                 <div class="card-header-custom border-warning border-top border-4">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0 text-warning">Greedy Approach</h4>
+                        <div>
+                            <h4 class="mb-0 text-warning">Greedy Approach</h4>
+                            <span class="badge bg-light text-muted border mt-1">O(N log N)</span>
+                        </div>
                         <span class="badge bg-warning text-dark fw-bold rounded-pill">Heuristic</span>
                     </div>
                 </div>
                 <div class="card-body p-4">
                     <div class="row text-center mb-4">
-                        <div class="col-6">
-                            <h2 class="display-4 fw-bold mb-0 text-dark">{{ greedy_count }}</h2>
-                            <span class="text-muted small text-uppercase fw-bold">Total Coins</span>
+                        <div class="col-4 border-end">
+                            <h3 class="fw-bold mb-0 text-dark">{{ greedy_time }}<small
+                                    class="fs-6 text-muted">ms</small></h3>
+                            <span class="text-muted small text-uppercase fw-bold"
+                                style="font-size: 0.65rem;">Time</span>
                         </div>
-                        <div class="col-6">
-                            <h2
-                                class="display-4 fw-bold mb-0 {% if greedy_success %}text-success{% else %}text-danger{% endif %}">
+                        <div class="col-4 border-end">
+                            <h3 class="fw-bold mb-0 text-dark">{{ greedy_count }}</h3>
+                            <span class="text-muted small text-uppercase fw-bold"
+                                style="font-size: 0.65rem;">Coins</span>
+                        </div>
+                        <div class="col-4">
+                            <h3
+                                class="fw-bold mb-0 {% if greedy_success %}text-success{% else %}text-danger{% endif %}">
                                 {% if greedy_success %}Yes{% else %}No{% endif %}
-                            </h2>
-                            <span class="text-muted small text-uppercase fw-bold">Success</span>
+                            </h3>
+                            <span class="text-muted small text-uppercase fw-bold"
+                                style="font-size: 0.65rem;">Success</span>
                         </div>
                     </div>
 
@@ -114,22 +125,32 @@
             <div class="card result-card h-100">
                 <div class="card-header-custom border-success border-top border-4">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0 text-success">Dynamic Programming</h4>
+                        <div>
+                            <h4 class="mb-0 text-success">Dynamic Programming</h4>
+                            <span class="badge bg-light text-muted border mt-1">O(A * N)</span>
+                        </div>
                         <span class="badge bg-success fw-bold rounded-pill text-white">Optimal</span>
                     </div>
                 </div>
                 <div class="card-body p-4">
                     <div class="row text-center mb-4">
-                        <div class="col-6">
-                            <h2 class="display-4 fw-bold mb-0 text-dark">{{ dp_count }}</h2>
-                            <span class="text-muted small text-uppercase fw-bold">Total Coins</span>
+                        <div class="col-4 border-end">
+                            <h3 class="fw-bold mb-0 text-dark">{{ dp_time }}<small class="fs-6 text-muted">ms</small>
+                            </h3>
+                            <span class="text-muted small text-uppercase fw-bold"
+                                style="font-size: 0.65rem;">Time</span>
                         </div>
-                        <div class="col-6">
-                            <h2
-                                class="display-4 fw-bold mb-0 {% if dp_success %}text-success{% else %}text-danger{% endif %}">
+                        <div class="col-4 border-end">
+                            <h3 class="fw-bold mb-0 text-dark">{{ dp_count }}</h3>
+                            <span class="text-muted small text-uppercase fw-bold"
+                                style="font-size: 0.65rem;">Coins</span>
+                        </div>
+                        <div class="col-4">
+                            <h3 class="fw-bold mb-0 {% if dp_success %}text-success{% else %}text-danger{% endif %}">
                                 {% if dp_success %}Yes{% else %}No{% endif %}
-                            </h2>
-                            <span class="text-muted small text-uppercase fw-bold">Success</span>
+                            </h3>
+                            <span class="text-muted small text-uppercase fw-bold"
+                                style="font-size: 0.65rem;">Success</span>
                         </div>
                     </div>
 

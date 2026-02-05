@@ -22,7 +22,9 @@
                         <th class="py-3 text-uppercase small fw-bold text-muted">Target</th>
                         <th class="py-3 text-uppercase small fw-bold text-muted">Coins</th>
                         <th class="py-3 text-center text-uppercase small fw-bold text-muted">Greedy</th>
+                        <th class="py-3 text-center text-uppercase small fw-bold text-muted">G. Time</th>
                         <th class="py-3 text-center text-uppercase small fw-bold text-muted">Dynamic</th>
+                        <th class="py-3 text-center text-uppercase small fw-bold text-muted">D. Time</th>
                         <th class="py-3 text-center text-uppercase small fw-bold text-muted">Result</th>
                     </tr>
                 </thead>
@@ -40,7 +42,13 @@
                             <span class="fw-bold text-dark">{{ item.greedy_count }}</span>
                         </td>
                         <td class="text-center">
+                            <span class="text-muted small mono-font">{{ item.greedy_time }} ms</span>
+                        </td>
+                        <td class="text-center">
                             <span class="fw-bold text-primary">{{ item.dp_count }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="text-muted small mono-font">{{ item.dp_time }} ms</span>
                         </td>
                         <td class="text-center">
                             {% if item.is_optimal %}
