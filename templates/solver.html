@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold mb-3">Problem <span class="text-primary">Solver</span></h1>
+                <p class="lead text-muted">
+                    Enter your target amount and available denominations to compare algorithms.
+                </p>
+            </div>
+
+            <div class="card form-card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <form action="/solve" method="POST">
+                        <div class="mb-5">
+                            <label for="amount" class="form-label text-muted fw-bold text-uppercase small">Target
+                                Amount</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-light border-end-0 text-muted"><i
+                                        class="fas fa-coins"></i></span>
+                                <input type="number" class="form-control form-control-lg border-start-0 ps-0"
+                                    id="amount" name="amount" placeholder="e.g. 63" required min="1">
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="coins" class="form-label text-muted fw-bold text-uppercase small">Coin
+                                Denominations</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-light border-end-0 text-muted"><i
+                                        class="fas fa-list-ol"></i></span>
+                                <input type="text" class="form-control form-control-lg border-start-0 ps-0" id="coins"
+                                    name="coins" placeholder="e.g. 1, 5, 10, 25" required pattern="^[\d,\s]+$">
+                            </div>
+                            <div class="form-text text-muted mt-2 ps-1"><i class="fas fa-info-circle me-1"></i> Enter
+                                comma-separated values.</div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-cta btn-lg py-3 text-uppercase letter-spacing-1">
+                                Run Comparison <i class="fas fa-bolt ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

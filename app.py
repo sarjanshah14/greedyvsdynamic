@@ -1,7 +1,9 @@
 import time
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = 'super_secret_key_for_no_reason'
 
 def get_min_coins_greedy(amount, coins):
     """
@@ -59,7 +61,7 @@ def get_min_coins_greedy(amount, coins):
             'remaining': remaining,
             'coin': None
         })
-        return None, 0, False, steps
+        return None, float('inf'), False, steps
         
     steps.append({
         'type': 'success',
@@ -85,7 +87,7 @@ def get_min_coins_dp(amount, coins):
                     parent[i] = coin
                     
     if dp[amount] == float('inf'):
-        return None, 0, False, [{'type': 'fail', 'desc': "DP Failed", 'remaining': amount}]
+        return None, float('inf'), False, [{'type': 'fail', 'desc': "DP Failed", 'remaining': amount}]
         
     # Reconstruct
     result_coins = []
@@ -121,6 +123,14 @@ def get_min_coins_dp(amount, coins):
 def index():
     return render_template('index.html')
 
+@app.route('/solver')
+def solver():
+    return render_template('solver.html')
+
+@app.route('/history')
+def history():
+    return render_template('history.html', history=session.get('history', []))
+
 @app.route('/team')
 def team():
     return render_template('team.html')
@@ -130,19 +140,38 @@ def solve():
     try:
         amount = int(request.form.get('amount'))
         coins_str = request.form.get('coins')
-        coins = [int(c.strip()) for c in coins_str.split(',')]
+        coins = [int(c.strip()) for c in coins_str.split(',') if c.strip()]
         
         # Greedy Execution
         start_greedy = time.time()
         greedy_result, greedy_count, greedy_success, greedy_steps = get_min_coins_greedy(amount, coins)
         end_greedy = time.time()
-        greedy_time = (end_greedy - start_greedy) * 1000  # ms
+        greedy_time = round((end_greedy - start_greedy) * 1000, 4)  # ms
         
         # DP Execution
         start_dp = time.time()
         dp_result, dp_count, dp_success, dp_steps = get_min_coins_dp(amount, coins)
         end_dp = time.time()
-        dp_time = (end_dp - start_dp) * 1000 # ms
+        dp_time = round((end_dp - start_dp) * 1000, 4) # ms
+        
+        # Store in Session History
+        if 'history' not in session:
+            session['history'] = []
+        
+        history_item = {
+            'timestamp': datetime.now().strftime("%H:%M:%S"),
+            'amount': amount,
+            'coins_list': coins,
+            'greedy_count': greedy_count if greedy_count != float('inf') else "Failed",
+            'dp_count': dp_count if dp_count != float('inf') else "Failed",
+            'is_optimal': greedy_count == dp_count
+        }
+        
+        # Append and keep only last 10
+        session['history'].append(history_item)
+        if len(session['history']) > 10:
+            session['history'].pop(0)
+        session.modified = True
         
         return render_template('result.html', 
                                amount=amount,
@@ -150,16 +179,16 @@ def solve():
                                greedy_result=greedy_result,
                                greedy_count=greedy_count,
                                greedy_success=greedy_success,
-                               greedy_time=f"{greedy_time:.4f}",
+                               greedy_time=greedy_time,
                                greedy_steps=greedy_steps,
                                dp_result=dp_result,
                                dp_count=dp_count,
                                dp_success=dp_success,
-                               dp_time=f"{dp_time:.4f}",
+                               dp_time=dp_time,
                                dp_steps=dp_steps)
                                
     except ValueError:
-        return "Invalid input. Please enter numbers correctly.", 400
+        return render_template('solver.html', error="Invalid input. Please enter numbers correctly.")
 
 if __name__ == '__main__':
     app.run(debug=True)

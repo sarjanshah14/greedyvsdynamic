@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="display-5 fw-bold mb-2">Session History</h1>
+            <p class="text-muted mb-0">Track your recent algorithm comparisons.</p>
+        </div>
+        <a href="/solver" class="btn btn-outline-primary rounded-pill px-4">
+            <i class="fas fa-plus me-2"></i> New Problem
+        </a>
+    </div>
+
+    {% if history %}
+    <div class="card shadow-lg border-0 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="py-3 ps-4 text-uppercase small fw-bold text-muted">Timestamp</th>
+                        <th class="py-3 text-uppercase small fw-bold text-muted">Target</th>
+                        <th class="py-3 text-uppercase small fw-bold text-muted">Coins</th>
+                        <th class="py-3 text-center text-uppercase small fw-bold text-muted">Greedy</th>
+                        <th class="py-3 text-center text-uppercase small fw-bold text-muted">Dynamic</th>
+                        <th class="py-3 text-center text-uppercase small fw-bold text-muted">Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in history|reverse %}
+                    <tr>
+                        <td class="ps-4 text-muted small">{{ item.timestamp }}</td>
+                        <td class="fw-bold">{{ item.amount }}</td>
+                        <td>
+                            {% for coin in item.coins_list %}
+                            <span class="badge bg-light text-dark border me-1">{{ coin }}</span>
+                            {% endfor %}
+                        </td>
+                        <td class="text-center">
+                            <span class="fw-bold text-dark">{{ item.greedy_count }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="fw-bold text-primary">{{ item.dp_count }}</span>
+                        </td>
+                        <td class="text-center">
+                            {% if item.is_optimal %}
+                            <span class="badge bg-success-subtle text-success rounded-pill px-3">Optimal</span>
+                            {% else %}
+                            <span class="badge bg-danger-subtle text-danger rounded-pill px-3">Suboptimal</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer bg-white border-top-0 py-3 ps-4 text-muted small">
+            Showing recent results from this session.
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <div class="mb-4 text-muted opacity-25">
+            <i class="fas fa-history fa-5x"></i>
+        </div>
+        <h3 class="fw-bold text-muted">No History Yet</h3>
+        <p class="text-muted mb-4">Run the solver to see your results here.</p>
+        <a href="/solver" class="btn btn-primary px-5 py-2 rounded-pill">Start Solving</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -2,76 +2,54 @@
 
 {% block content %}
 <div class="container py-5">
-    <div class="text-center mb-5">
+    <div class="text-center mb-5 pb-3">
         <h1 class="display-3 fw-bold mb-3">Making Change <span class="text-primary">Solver</span></h1>
-        <p class="lead text-muted mx-auto" style="max-width: 700px;">
-            Visualize and compare the efficiency of <strong>Greedy</strong> heuristics versus <strong>Dynamic
-                Programming</strong> optimization.
+        <p class="lead text-muted mx-auto" style="max-width: 800px;">
+            An interactive educational tool to visualize and compare the efficiency of <strong>Greedy</strong>
+            heuristics versus <strong>Dynamic Programming</strong> optimization.
         </p>
+        <div class="mt-4">
+            <a href="/solver" class="btn btn-cta btn-lg px-5 py-3 shadow-lg">Start Solving <i
+                    class="fas fa-arrow-right ms-2"></i></a>
+        </div>
     </div>
 
-    <!-- Step Depiction Section -->
+    <!-- Step Depiction Section - Enlarged -->
     <div class="row g-4 mb-5">
-        <div class="col-md-3 col-sm-6">
-            <div class="card step-card h-100 p-4 text-center">
-                <div class="step-icon icon-start mx-auto mb-3">1</div>
-                <h5 class="fw-bold">Input</h5>
-                <p class="text-muted small mb-0">Define amount and coin text-muted system.</p>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="card step-card h-100 p-4 text-center">
-                <div class="step-icon icon-check mx-auto mb-3">2</div>
-                <h5 class="fw-bold">Greedy</h5>
-                <p class="text-muted small mb-0">Rapidly pick largest available coins.</p>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="card step-card h-100 p-4 text-center">
-                <div class="step-icon icon-take mx-auto mb-3">3</div>
-                <h5 class="fw-bold">Dynamic</h5>
-                <p class="text-muted small mb-0">Calculate globally optimal solution.</p>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="card step-card h-100 p-4 text-center">
-                <div class="step-icon icon-success mx-auto mb-3">4</div>
-                <h5 class="fw-bold">Compare</h5>
-                <p class="text-muted small mb-0">Analyze efficiency and correctness.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Input Form -->
-    <div class="row justify-content-center" id="solver">
-        <div class="col-lg-7">
-            <div class="card form-card shadow-lg border-0">
-                <div class="card-body p-5">
-                    <h3 class="mb-4 text-center fw-bold">Enter Problem Details</h3>
-                    <form action="/solve" method="POST">
-                        <div class="mb-4">
-                            <label for="amount" class="form-label text-muted fw-bold text-uppercase small">Target
-                                Amount</label>
-                            <input type="number" class="form-control form-control-lg" id="amount" name="amount"
-                                placeholder="e.g. 63" required min="1">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="coins" class="form-label text-muted fw-bold text-uppercase small">Coin
-                                Denominations</label>
-                            <input type="text" class="form-control form-control-lg" id="coins" name="coins"
-                                placeholder="e.g. 1, 5, 10, 25" required pattern="^[\d,\s]+$">
-                            <div class="form-text text-muted mt-2"><i class="fas fa-info-circle me-1"></i>
-                                Comma-separated values (e.g. 1, 5, 10, 25).</div>
-                        </div>
-
-                        <div class="d-grid gap-2 mt-5">
-                            <button type="submit" class="btn btn-cta btn-lg py-3">
-                                Solve & Compare <i class="fas fa-arrow-right ms-2"></i>
-                            </button>
-                        </div>
-                    </form>
+        <div class="col-md-6">
+            <div class="card step-card h-100 p-5 text-center">
+                <div class="step-icon icon-start mx-auto mb-4" style="width: 64px; height: 64px; font-size: 1.5rem;">1
                 </div>
+                <h3 class="fw-bold mb-3">Define Input</h3>
+                <p class="text-muted mb-0 fs-5">Enter any target amount and customization coin denominations to test
+                    various scenarios.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card step-card h-100 p-5 text-center">
+                <div class="step-icon icon-check mx-auto mb-4" style="width: 64px; height: 64px; font-size: 1.5rem;">2
+                </div>
+                <h3 class="fw-bold mb-3">Greedy Approach</h3>
+                <p class="text-muted mb-0 fs-5">Visualize how the Greedy algorithm rapidly selects the largest available
+                    coins at each step.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card step-card h-100 p-5 text-center">
+                <div class="step-icon icon-take mx-auto mb-4" style="width: 64px; height: 64px; font-size: 1.5rem;">3
+                </div>
+                <h3 class="fw-bold mb-3">Dynamic Programming</h3>
+                <p class="text-muted mb-0 fs-5">See how DP builds a globally optimal solution from the bottom up
+                    effectively.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card step-card h-100 p-5 text-center">
+                <div class="step-icon icon-success mx-auto mb-4" style="width: 64px; height: 64px; font-size: 1.5rem;">4
+                </div>
+                <h3 class="fw-bold mb-3">Compare Results</h3>
+                <p class="text-muted mb-0 fs-5">Analyze execution time, coin counts, and optimality in a side-by-side
+                    comparison.</p>
             </div>
         </div>
     </div>
