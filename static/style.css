@@ -1,22 +1,32 @@
 :root {
-    --primary-color: #4361ee;
-    --secondary-color: #3f37c9;
-    --accent-color: #4895ef;
-    --light-bg: #f8f9fa;
-    --card-bg: #ffffff;
-    --text-color: #212529;
-    --success-color: #2a9d8f;
-    --warning-color: #e9c46a;
-    --danger-color: #e76f51;
-    --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
-    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
-    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
+    /* Dark Theme Palette */
+    --bg-body: #0f172a;
+    --bg-card: #1e293b;
+    --bg-input: #334155;
+
+    --primary-color: #6366f1;
+    /* Indigo 500 */
+    --secondary-color: #8b5cf6;
+    /* Violet 500 */
+    --accent-color: #38bdf8;
+    /* Sky 400 */
+
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+
+    --success-color: #22c55e;
+    --warning-color: #eab308;
+    --danger-color: #ef4444;
+
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 20px 40px -10px rgba(99, 102, 241, 0.2);
 }
 
 body {
-    background-color: var(--light-bg);
+    background-color: var(--bg-body);
     font-family: 'Inter', sans-serif;
-    color: var(--text-color);
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
@@ -24,9 +34,14 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
     font-weight: 700;
-    color: var(--secondary-color);
+    color: var(--text-primary);
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
 }
 
 .container {
@@ -35,58 +50,65 @@ h5 {
 
 /* Mega Navbar */
 .navbar {
-    background: var(--gradient-primary) !important;
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     min-height: 80px;
 }
 
 .navbar-brand {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.5px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .navbar-text-subtitle {
-    font-size: 0.85rem;
-    font-weight: 400;
-    opacity: 0.9;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
     display: block;
     line-height: 1;
+    margin-top: 4px;
 }
 
 .nav-link {
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9) !important;
-    margin-left: 1rem;
-    position: relative;
+    font-weight: 500;
+    color: var(--text-secondary) !important;
+    margin-left: 1.5rem;
     transition: color 0.3s;
 }
 
-.nav-link:hover {
-    color: #fff !important;
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent-color) !important;
 }
 
 .btn-cta {
-    background: #fff;
-    color: var(--primary-color);
-    font-weight: 700;
+    background: var(--gradient-primary);
+    color: white;
+    font-weight: 600;
     padding: 0.6rem 1.5rem;
     border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
     transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    text-decoration: none;
 }
 
 .btn-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    background: #f8f9fa;
-    color: var(--secondary-color);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+    color: white;
 }
 
 /* Cards & Layout */
 .card {
-    border: none;
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     box-shadow: var(--shadow-soft);
     transition: transform 0.3s, box-shadow 0.3s;
@@ -94,28 +116,39 @@ h5 {
 }
 
 .step-card:hover,
-.result-card:hover {
+.result-card:hover,
+.team-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    border-color: var(--primary-color);
 }
 
 .card-header-custom {
-    background: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
 }
 
 /* Form Styles */
 .form-control {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
     border-radius: 12px;
     padding: 1rem;
-    border: 2px solid #e9ecef;
-    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+}
+
+.form-control::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
 }
 
 .form-control:focus {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
 }
 
 /* Timeline Visualization */
@@ -139,7 +172,7 @@ h5 {
     top: 30px;
     bottom: -20px;
     width: 2px;
-    background: #e9ecef;
+    background: rgba(255, 255, 255, 0.1);
     z-index: -1;
 }
 
@@ -159,6 +192,7 @@ h5 {
     font-size: 0.8rem;
     margin-right: 1rem;
     flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .icon-start {
@@ -174,7 +208,7 @@ h5 {
 }
 
 .icon-skip {
-    background: #adb5bd;
+    background: #64748b;
 }
 
 .icon-fail {
@@ -186,28 +220,30 @@ h5 {
 }
 
 .step-content {
-    background: #f8f9fa;
+    background: rgba(255, 255, 255, 0.05);
     padding: 0.75rem 1rem;
     border-radius: 8px;
     flex-grow: 1;
     font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .step-detail {
     font-size: 0.8rem;
-    color: #6c757d;
+    color: var(--text-secondary);
 }
 
 /* DP Grid/Table Vibe */
 .dp-flow-card {
-    background: #f1f8ff;
+    background: rgba(99, 102, 241, 0.1);
     border-left: 4px solid var(--primary-color);
+    color: var(--text-primary);
 }
 
 /* Comparison Bar */
 .comparison-bar-container {
     height: 12px;
-    background: #e9ecef;
+    background: #334155;
     border-radius: 6px;
     overflow: hidden;
     margin-top: 0.5rem;
@@ -239,23 +275,11 @@ h5 {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0 auto 1rem;
-    box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
-}
-
-.team-card {
-    text-align: center;
-    padding: 2rem;
-    border-radius: 16px;
-    background: white;
-    transition: transform 0.3s;
-}
-
-.team-card:hover {
-    transform: translateY(-8px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
 }
 
 .team-role {
-    color: var(--primary-color);
+    color: var(--accent-color);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -264,13 +288,19 @@ h5 {
 
 /* Footer */
 .footer {
-    background: #212529 !important;
+    background: #0b1120 !important;
     padding: 3rem 0;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .footer a {
-    color: white;
+    color: var(--text-primary);
     text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer a:hover {
+    color: var(--accent-color);
 }

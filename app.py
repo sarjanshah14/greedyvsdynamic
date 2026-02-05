@@ -121,6 +121,10 @@ def get_min_coins_dp(amount, coins):
 def index():
     return render_template('index.html')
 
+@app.route('/team')
+def team():
+    return render_template('team.html')
+
 @app.route('/solve', methods=['POST'])
 def solve():
     try:

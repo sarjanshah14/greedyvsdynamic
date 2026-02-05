@@ -2,67 +2,76 @@
 
 {% block content %}
 <div class="container py-5">
-    <div class="page-header mb-5">
-        <h1>Making Change Problem</h1>
-        <p>Greedy vs Dynamic Programming Comparison</p>
+    <div class="text-center mb-5">
+        <h1 class="display-3 fw-bold mb-3">Making Change <span class="text-primary">Solver</span></h1>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">
+            Visualize and compare the efficiency of <strong>Greedy</strong> heuristics versus <strong>Dynamic
+                Programming</strong> optimization.
+        </p>
     </div>
 
     <!-- Step Depiction Section -->
     <div class="row g-4 mb-5">
-        <div class="col-md">
-            <div class="card step-card p-4">
-                <div class="step-number">1</div>
-                <h5>Input Data</h5>
-                <p class="text-muted small mb-0">Define the target amount and the available coin denominations.</p>
+        <div class="col-md-3 col-sm-6">
+            <div class="card step-card h-100 p-4 text-center">
+                <div class="step-icon icon-start mx-auto mb-3">1</div>
+                <h5 class="fw-bold">Input</h5>
+                <p class="text-muted small mb-0">Define amount and coin text-muted system.</p>
             </div>
         </div>
-        <div class="col-md">
-            <div class="card step-card p-4">
-                <div class="step-number">2</div>
-                <h5>Run Greedy</h5>
-                <p class="text-muted small mb-0">Attempt to solve by always taking the largest coin less than remainder.
-                </p>
+        <div class="col-md-3 col-sm-6">
+            <div class="card step-card h-100 p-4 text-center">
+                <div class="step-icon icon-check mx-auto mb-3">2</div>
+                <h5 class="fw-bold">Greedy</h5>
+                <p class="text-muted small mb-0">Rapidly pick largest available coins.</p>
             </div>
         </div>
-        <div class="col-md">
-            <div class="card step-card p-4">
-                <div class="step-number">3</div>
-                <h5>Run DP</h5>
-                <p class="text-muted small mb-0">Build solution from bottom-up to guarantee the optimal minimum count.
-                </p>
+        <div class="col-md-3 col-sm-6">
+            <div class="card step-card h-100 p-4 text-center">
+                <div class="step-icon icon-take mx-auto mb-3">3</div>
+                <h5 class="fw-bold">Dynamic</h5>
+                <p class="text-muted small mb-0">Calculate globally optimal solution.</p>
             </div>
         </div>
-        <div class="col-md">
-            <div class="card step-card p-4">
-                <div class="step-number">4</div>
-                <h5>Compare</h5>
-                <p class="text-muted small mb-0">Analyze the results to see if Greedy failed or matched DP.</p>
+        <div class="col-md-3 col-sm-6">
+            <div class="card step-card h-100 p-4 text-center">
+                <div class="step-icon icon-success mx-auto mb-3">4</div>
+                <h5 class="fw-bold">Compare</h5>
+                <p class="text-muted small mb-0">Analyze efficiency and correctness.</p>
             </div>
         </div>
     </div>
 
     <!-- Input Form -->
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="form-card">
-                <h4 class="mb-4">Enter Problem Details</h4>
-                <form action="/solve" method="POST">
-                    <div class="mb-3">
-                        <label for="amount" class="form-label">Target Amount</label>
-                        <input type="number" class="form-control" id="amount" name="amount" placeholder="e.g. 63"
-                            required min="1">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="coins" class="form-label">Coin Denominations (comma-separated)</label>
-                        <input type="text" class="form-control" id="coins" name="coins" placeholder="e.g. 1, 5, 10, 25"
-                            required pattern="^[\d,\s]+$">
-                        <div class="form-text">Enter coins in any order (e.g. 1, 5, 10, 25). Assume infinite supply.
+    <div class="row justify-content-center" id="solver">
+        <div class="col-lg-7">
+            <div class="card form-card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <h3 class="mb-4 text-center fw-bold">Enter Problem Details</h3>
+                    <form action="/solve" method="POST">
+                        <div class="mb-4">
+                            <label for="amount" class="form-label text-muted fw-bold text-uppercase small">Target
+                                Amount</label>
+                            <input type="number" class="form-control form-control-lg" id="amount" name="amount"
+                                placeholder="e.g. 63" required min="1">
                         </div>
-                    </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Solve & Compare</button>
-                </form>
+                        <div class="mb-4">
+                            <label for="coins" class="form-label text-muted fw-bold text-uppercase small">Coin
+                                Denominations</label>
+                            <input type="text" class="form-control form-control-lg" id="coins" name="coins"
+                                placeholder="e.g. 1, 5, 10, 25" required pattern="^[\d,\s]+$">
+                            <div class="form-text text-muted mt-2"><i class="fas fa-info-circle me-1"></i>
+                                Comma-separated values (e.g. 1, 5, 10, 25).</div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-5">
+                            <button type="submit" class="btn btn-cta btn-lg py-3">
+                                Solve & Compare <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
