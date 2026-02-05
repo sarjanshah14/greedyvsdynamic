@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 def get_min_coins_greedy(amount, coins):
     """
-    Greedy algorithm with step tracking.
+    Greedy algorithm with structured step tracking.
     """
     coins = sorted(coins, reverse=True)
     result_coins = []
@@ -13,39 +13,69 @@ def get_min_coins_greedy(amount, coins):
     remaining = amount
     steps = []
     
-    steps.append(f"Starting Greedy with amount: {amount}")
-    steps.append(f"Sorted coins: {coins}")
+    # Initial Step
+    steps.append({
+        'type': 'start',
+        'desc': f"Starting Greedy search",
+        'remaining': amount,
+        'coin': None
+    })
     
     for coin in coins:
         if remaining == 0:
             break
-        steps.append(f"Checking coin: {coin} against remaining: {remaining}")
+            
+        steps.append({
+            'type': 'check',
+            'desc': f"Checking coin {coin}",
+            'remaining': remaining,
+            'coin': coin
+        })
+        
         count = remaining // coin
         if count > 0:
             result_coins.extend([coin] * count)
             remaining -= coin * count
             total_count += count
-            steps.append(f"-> Took {count}x {coin} coin(s). Remaining: {remaining}")
+            steps.append({
+                'type': 'take',
+                'desc': f"Took {count}x {coin}",
+                'remaining': remaining,
+                'coin': coin,
+                'count': count
+            })
         else:
-            steps.append(f"-> Coin {coin} is too large. Skipping.")
+            steps.append({
+                'type': 'skip',
+                'desc': f"Coin {coin} > Remaining",
+                'remaining': remaining,
+                'coin': coin
+            })
             
     if remaining != 0:
-        steps.append("Failed to form the total amount.")
+        steps.append({
+            'type': 'fail',
+            'desc': "Failed to reach 0",
+            'remaining': remaining,
+            'coin': None
+        })
         return None, 0, False, steps
         
-    steps.append(f"Success! Total coins used: {total_count}")
+    steps.append({
+        'type': 'success',
+        'desc': f"Solved! Used {total_count} coins",
+        'remaining': 0,
+        'coin': None
+    })
     return result_coins, total_count, True, steps
 
 def get_min_coins_dp(amount, coins):
     """
-    DP algorithm with step tracking (reconstruction).
+    DP algorithm with structured step tracking (reconstruction).
     """
     dp = [float('inf')] * (amount + 1)
     dp[0] = 0
     parent = [-1] * (amount + 1)
-    
-    # We won't log every single DP table update as it's too much for large N.
-    # We will log the reconstruction phase.
     
     for i in range(1, amount + 1):
         for coin in coins:
@@ -55,22 +85,36 @@ def get_min_coins_dp(amount, coins):
                     parent[i] = coin
                     
     if dp[amount] == float('inf'):
-        return None, 0, False, ["DP failed to find a solution."]
+        return None, 0, False, [{'type': 'fail', 'desc': "DP Failed", 'remaining': amount}]
         
     # Reconstruct
     result_coins = []
     curr = amount
     steps = []
-    steps.append(f"DP Table built. Reconstructing solution for amount: {amount}")
+    steps.append({
+        'type': 'start',
+        'desc': f"Backtracking optimally from {amount}",
+        'remaining': amount,
+        'coin': None
+    })
     
     while curr > 0:
         coin = parent[curr]
         result_coins.append(coin)
-        prev = curr
         curr -= coin
-        steps.append(f"At {prev}, best coin to take is {coin}. Remaining: {curr}")
+        steps.append({
+            'type': 'take',
+            'desc': f"Optimal choice: {coin}",
+            'remaining': curr,
+            'coin': coin
+        })
         
-    steps.append(f"Success! Total coins found: {len(result_coins)}")
+    steps.append({
+        'type': 'success',
+        'desc': f"Solved! Used {len(result_coins)} coins",
+        'remaining': 0,
+        'coin': None
+    })
     return result_coins, dp[amount], True, steps
 
 @app.route('/')
